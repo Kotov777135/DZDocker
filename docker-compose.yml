@@ -1,0 +1,19 @@
+services:
+ web:
+  build: ./web
+  container_name: web
+  ports:
+   - "8098:8000"
+
+ nginx:
+  image: nginx:alpine
+  container_name: nginx
+  ports:
+   - "80:80"
+
+ client:
+  build: ./client
+  container_name: client
+  depends_on:
+   - web
+  restart: unless-stopped
